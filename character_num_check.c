@@ -1,10 +1,12 @@
 #include "monty.h"
+
 /**
  *Chk - Checks to see if the input made by the user is an int or not
  *@out: The next character in the same string of the user input
  *@l_n: Line number of the user input being evaluated.
  *Return: 0 on success, 1 on failure/error
  */
+
 int Chk(const char *out, unsigned int l_n)
 {
 	int i, check;

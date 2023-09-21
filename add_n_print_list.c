@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  *add_node - Making the doubly linked list.
  *The framework for the stack and queue.
@@ -6,6 +7,7 @@
  *@num: The line number currently being evaluated.
  *Return: 0 on success.
  */
+
 int add_node(stack_t **head, unsigned int num)
 {
 	stack_t *new;
@@ -27,11 +29,14 @@ int add_node(stack_t **head, unsigned int num)
 	new->next = *head;
 	*head = new;
 	return (0);
+
 }
+
 /**
  *print_list - Function that prints the entire stack / queue to stdout.
  *@head: A pointer that holds reference to the entire linked list.
  */
+
 void print_list(stack_t **head)
 {
 	stack_t *temp;
