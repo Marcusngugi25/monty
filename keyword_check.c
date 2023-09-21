@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  *keyw_check - Function that looks for the opcode.
  *@u_input: The user input passed from the getline function.
@@ -6,6 +7,7 @@
  *@stk: The head pointer for doubly linked list.
  *Return: 0 on success, 1 on failure/error
  */
+
 int keyw_check(char *u_input, unsigned int l_num, stack_t **stk)
 {
 	char *output, *tok_u_input;
