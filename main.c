@@ -1,12 +1,14 @@
 #include "monty.h"
 
 int errorHandling = 0;
+
 /**
  *main - function that reads from file and looks for opcodes
  *@argc: Number of arguments passed
  *@argv: Storing the user input as an array of characters.
  *Return: 0 on success.
  */
+
 int main(int argc, char *argv[])
 {
 	char *u_input;
