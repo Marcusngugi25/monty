@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  *find_op - Function that finds the requested opcode
  *@tok_u_input: Tokenized user input
@@ -6,6 +7,7 @@
  *@l_num: Line number of the current line being evaluated.
  *Return: 0 on success, 1 on error/failure
  */
+
 int find_op(char *tok_u_input, stack_t **stack, unsigned int l_num)
 {
 	int a;
