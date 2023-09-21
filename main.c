@@ -1,51 +1,46 @@
 #include "monty.h"
 
-int value[3] = {0, 0, 0};
+int errorHandling = 0;
 /**
- * main - Interpreter of the Monty Language
- * @argc: argument count
- * @argv: the list of arguments
- * Return: 1 if passed
+ *main - function that reads from file and looks for opcodes
+ *@argc: Number of arguments passed
+ *@argv: Storing the user input as an array of characters.
+ *Return: 0 on success.
  */
-
 int main(int argc, char *argv[])
 {
-	char *path, *line, *tok_line[2];
+	char *u_input;
 	FILE *fp;
-	void (*fptr)(stack_t **stack, unsigned int ln);
+	size_t num;
+	int l_num;
 	stack_t *head;
-	size_t len, lineno, status;
-	ssize_t read;
 
 	head = NULL;
-	line = NULL;
-	check_argc(argc);
-	path = argv[1];
-
-	fp = fopen(path, "r");
-	check_file_stream(fp, path);
-	for (lineno = 1; (read = getline(&line, &len, fp)) != -1; lineno++)
+	fp = NULL;
+	u_input = NULL;
+	if (argc != 2)
 	{
-		if (check_empty(line))
-			continue;
-		status = tokenize_line(line, tok_line);
-		if (status == 0)
-			continue;
-
-		check_if_push(tok_line, lineno);
-		check_fail(line, fp, head);
-		check_data_structure(tok_line[0]);
-		fptr = get_opcode_func(tok_line[0]);
-		check_opcode(fptr, lineno, tok_line[0]);
-		check_fail(line, fp, head);
-
-		(*fptr)(&head, lineno);
-		check_fail(line, fp, head);
-		clear_strings(tok_line);
+		printf("USAGE: monty file\n");
+		exit(EXIT_FAILURE);
 	}
-	free(line);
-	fclose(fp);
-	free_stack(head);
-
+	fp = fopen(argv[1], "r");
+	if (fp == NULL)
+	{
+		printf("Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+	l_num = 1;
+	num = 0;
+	for (l_num = 1; (getline(&u_input, &num, fp)) != -1; l_num++)
+	{
+		if (strcmp(u_input, "nop"))
+			keyw_check(u_input, l_num, &head);
+		if (errorHandling != 0)
+		{
+			free_this(u_input, head, fp);
+			exit(EXIT_FAILURE);
+		}
+	}
+	free_this(u_input, head, fp);
 	return (0);
 }
